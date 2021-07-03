@@ -2,7 +2,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ByteExam1 {
+public class ByteExam2 {
 
 	public static void main(String[] args) {
 		long startTime = System.currentTimeMillis();
@@ -14,9 +14,11 @@ public class ByteExam1 {
 		fis = new FileInputStream("C:/Users/Tenzi/Desktop/Java/javanext/java_NextLevel/ByteExam1.java");//받아올 파일
 		fos = new FileOutputStream("Byte.txt");//출력 할 곳
 		
-		int readData = -1;
-		while((readData = fis.read()) != -1) {
-			fos.write(readData);
+		//전에껀 1바이트씩 읽었다면 이렇게 하면 한번에 512바이트를 읽는다.
+		int readCount = -1;
+		byte[] buffer = new byte[512];
+		while((readCount = fis.read(buffer)) != -1) {
+			fos.write(buffer,0 , readCount);
 		}
 		
 		}catch(Exception e) {
@@ -36,7 +38,7 @@ public class ByteExam1 {
 			}
 		}
 		long endTime = System.currentTimeMillis();
-		System.out.println(endTime - startTime);
+				System.out.println(endTime - startTime);
 	}
 
 }
